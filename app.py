@@ -257,7 +257,16 @@ def add_song_sidebar():
 
 def playlist_tabs(playlists):
     """Render playlists in tabs."""
-    include_mixed = st.session_state.profile.get("include_mixed", True)
+    profile = st.session_state.profile
+    include_mixed = profile.get("include_mixed", True)
+    hype_min = profile.get("hype_min_energy", 7)
+    chill_max = profile.get("chill_max_energy", 3)
+
+    st.caption(
+        f"Songs with energy **\u2265 {hype_min}** land in Hype. "
+        f"Songs with energy **\u2264 {chill_max}** land in Chill. "
+        f"Everything in between ({chill_max + 1}\u2013{hype_min - 1}) goes to Mixed."
+    )
 
     tab_labels = ["Hype", "Chill"]
     if include_mixed:
@@ -272,6 +281,7 @@ def playlist_tabs(playlists):
 
 def render_playlist(label, songs):
     st.subheader(f"{label} playlist")
+
     if not songs:
         st.write("No songs in this playlist.")
         return
