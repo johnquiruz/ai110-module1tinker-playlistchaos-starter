@@ -224,14 +224,24 @@ def add_song_sidebar():
     """Render the Add Song controls in the sidebar."""
     st.sidebar.header("Add a song")
 
-    title = st.sidebar.text_input("Title")
-    artist = st.sidebar.text_input("Artist")
+    # Reset fields if flagged from a previous successful add
+    if st.session_state.get("_reset_add_form"):
+        st.session_state.add_title = ""
+        st.session_state.add_artist = ""
+        st.session_state.add_genre = "rock"
+        st.session_state.add_energy = 5
+        st.session_state.add_tags = ""
+        st.session_state._reset_add_form = False
+
+    title = st.sidebar.text_input("Title", key="add_title")
+    artist = st.sidebar.text_input("Artist", key="add_artist")
     genre = st.sidebar.selectbox(
         "Genre",
         options=["rock", "lofi", "pop", "jazz", "electronic", "ambient", "other"],
+        key="add_genre",
     )
-    energy = st.sidebar.slider("Energy", min_value=1, max_value=10, value=5)
-    tags_text = st.sidebar.text_input("Tags (comma separated)")
+    energy = st.sidebar.slider("Energy", min_value=1, max_value=10, value=5, key="add_energy")
+    tags_text = st.sidebar.text_input("Tags (comma separated)", key="add_tags")
 
     if st.sidebar.button("Add to playlist"):
         raw_tags = [t.strip() for t in tags_text.split(",")]
@@ -258,6 +268,8 @@ def add_song_sidebar():
                 all_songs.append(normalized)
                 st.session_state.songs = all_songs
                 st.sidebar.success(f"Added \"{title}\" by {artist} to the playlist!")
+                st.session_state._reset_add_form = True
+                st.rerun()
 
 
 def playlist_tabs(playlists):
