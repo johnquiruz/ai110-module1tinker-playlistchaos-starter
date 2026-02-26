@@ -150,9 +150,9 @@ def most_common_artist(songs: List[Song]) -> Tuple[str, int]:
 def search_songs(
     songs: List[Song],
     query: str,
-    field: str = "artist",
+    field: str = "title_or_artist",
 ) -> List[Song]:
-    """Return songs matching the query on a given field."""
+    """Return songs matching the query on title or artist."""
     if not query:
         return songs
 
@@ -160,8 +160,9 @@ def search_songs(
     filtered: List[Song] = []
 
     for song in songs:
-        value = str(song.get(field, "")).lower()
-        if value and value in q:
+        title = str(song.get("title", "")).lower()
+        artist = str(song.get("artist", "")).lower()
+        if q in title or q in artist:
             filtered.append(song)
 
     return filtered
