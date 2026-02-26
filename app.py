@@ -286,11 +286,18 @@ def render_playlist(label, songs):
     for song in filtered:
         mood = song.get("mood", "?")
         tags = ", ".join(song.get("tags", []))
-        st.write(
-            f"- **{song['title']}** by {song['artist']} "
+        highlight = song.get("highlight", False)
+        line = (
+            f"**{song['title']}** by {song['artist']} "
             f"(genre {song['genre']}, energy {song['energy']}, mood {mood}) "
             f"[{tags}]"
         )
+        if highlight:
+            st.markdown(
+                f"⭐ {line} &nbsp; **\[Favorite Genre\]**"
+            )
+        else:
+            st.write(f"- {line}")
 
 
 def lucky_section(playlists):

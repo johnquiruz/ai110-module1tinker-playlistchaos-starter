@@ -73,7 +73,7 @@ def classify_song(song: Song, profile: Dict[str, object]) -> str:
     is_hype_keyword = any(k in genre for k in hype_keywords)
     is_chill_keyword = any(k in title for k in chill_keywords)
 
-    if genre == favorite_genre or energy >= hype_min_energy or is_hype_keyword:
+    if energy >= hype_min_energy or is_hype_keyword:
         return "Hype"
     if energy <= chill_max_energy or is_chill_keyword:
         return "Chill"
@@ -88,10 +88,13 @@ def build_playlists(songs: List[Song], profile: Dict[str, object]) -> PlaylistMa
         "Mixed": [],
     }
 
+    favorite_genre = normalize_genre(str(profile.get("favorite_genre", "")))
+
     for song in songs:
         normalized = normalize_song(song)
         mood = classify_song(normalized, profile)
         normalized["mood"] = mood
+        normalized["highlight"] = normalized.get("genre", "") == favorite_genre
         playlists[mood].append(normalized)
 
     return playlists
