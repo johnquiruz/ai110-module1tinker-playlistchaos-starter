@@ -13,3 +13,7 @@ and Chill max energy conditions, place it in Mixed.
 The results of a search query should be by song title or artist.
 
 As the user types in a search query, the playlist should update in real-time.
+
+Condense the Hype min energy and Chill max energy sliders into a single double 
+range slider that reflects the lower range as "Chill", the middle range as "Mixed", 
+and the outer range as "Hype".

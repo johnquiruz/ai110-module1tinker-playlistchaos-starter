@@ -249,6 +249,7 @@ def add_song_sidebar():
             all_songs = st.session_state.songs[:]
             all_songs.append(normalized)
             st.session_state.songs = all_songs
+            st.sidebar.success(f"Added \"{title}\" by {artist} to the playlist!")
 
 
 def playlist_tabs(playlists):
