@@ -376,7 +376,7 @@ def clear_controls():
 
 def main():
     st.set_page_config(page_title="Playlist Chaos", layout="wide")
-    st.title("Playlist Chaos")
+    st.title("Playlist Khaos")
 
     st.write(
         "An AI assistant tried to build a smart playlist engine. "

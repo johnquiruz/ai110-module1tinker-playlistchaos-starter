@@ -1,0 +1,15 @@
+Instead of categorizing a song whose genre matches the profile's Favorite genre 
+into the Hype playlist, boost the songs visibility by highlighting it and keep 
+it in its respective playlist based on energy.
+
+Under the "Hype playlist title", create a subheader or text that explains how 
+the Hype min energy and Chill max energy conditions determine how each song is 
+categorized in a playlist based on energy. This feature is not intuitive to the 
+user as it stands.
+
+When a song's energy is in the ambiguous middle range amongst the Hype min energy 
+and Chill max energy conditions, place it in Mixed.
+
+The results of a search query should be by song title or artist.
+
+As the user types in a search query, the playlist should update in real-time.
