@@ -17,3 +17,5 @@ As the user types in a search query, the playlist should update in real-time.
 Condense the Hype min energy and Chill max energy sliders into a single double 
 range slider that reflects the lower range as "Chill", the middle range as "Mixed", 
 and the outer range as "Hype".
+
+When rolling a lucky pick, songs from the Mixed playlist are blacklisted.

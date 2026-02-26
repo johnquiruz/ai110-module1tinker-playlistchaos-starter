@@ -267,9 +267,13 @@ def add_song_sidebar():
                 all_songs = st.session_state.songs[:]
                 all_songs.append(normalized)
                 st.session_state.songs = all_songs
-                st.sidebar.success(f"Added \"{title}\" by {artist} to the playlist!")
+                st.session_state._add_success_msg = f"Added \"{title}\" by {artist} to the playlist!"
                 st.session_state._reset_add_form = True
                 st.rerun()
+
+    if st.session_state.get("_add_success_msg"):
+        st.sidebar.success(st.session_state._add_success_msg)
+        st.session_state._add_success_msg = None
 
 
 def playlist_tabs(playlists):
