@@ -189,6 +189,11 @@ def profile_sidebar():
 
     profile = st.session_state.profile
 
+    if "hype_min_energy_slider" not in st.session_state:
+        st.session_state.hype_min_energy_slider = int(profile.get("hype_min_energy", 7))
+    if "chill_max_energy_slider" not in st.session_state:
+        st.session_state.chill_max_energy_slider = int(profile.get("chill_max_energy", 3))
+
     profile["name"] = st.sidebar.text_input(
         "Profile name",
         value=str(profile.get("name", "")),
@@ -196,18 +201,18 @@ def profile_sidebar():
 
     col1, col2 = st.sidebar.columns(2)
     with col1:
-        profile["hype_min_energy"] = st.sidebar.slider(
+        profile["hype_min_energy"] = col1.slider(
             "Hype min energy",
             min_value=1,
             max_value=10,
-            value=int(profile.get("hype_min_energy", 7)),
+            key="hype_min_energy_slider",
         )
     with col2:
-        profile["chill_max_energy"] = st.sidebar.slider(
+        profile["chill_max_energy"] = col2.slider(
             "Chill max energy",
             min_value=1,
             max_value=10,
-            value=int(profile.get("chill_max_energy", 3)),
+            key="chill_max_energy_slider",
         )
 
     profile["favorite_genre"] = st.sidebar.selectbox(
